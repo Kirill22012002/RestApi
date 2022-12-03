@@ -5,20 +5,14 @@ var builder = WebApplication.CreateBuilder();
 builder.Services.AddMvc();
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
-{
 
-});
+builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient<IBaseRepository<Book>, BaseRepository<Book>>();
 
 var connectionString = @"Server=w12.hoster.by;TrustServerCertificate=True; DataBase=cvetulep_flowerDataBase;User Id=cvetulep_administrator; Password=17_29dqeB";
 builder.Services.AddDbContext<ApplicationContext>(options =>
     options.UseSqlServer(connectionString));
-
-IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
-
-builder.Services.AddSingleton(mapper);
 
 var app = builder.Build();
 
@@ -39,7 +33,7 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
         name: "default",
-        pattern: "{controller=Main}/{action=Get}/{id?}");
+        pattern: "{controller=Main}/{action=GetBooks}/{id?}");
 });
 
 app.Run();

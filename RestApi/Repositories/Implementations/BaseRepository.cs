@@ -3,42 +3,20 @@ namespace RestApi.Repositories.Implementations
 {
     public class BaseRepository<TDbModel> : IBaseRepository<TDbModel> where TDbModel : BaseModel
     {
-        private ApplicationContext Context { get; set; }
-        public BaseRepository(ApplicationContext context)
+        private ApplicationContext _context { get; set; }
+        private DbSet<TDbModel> _dbSet;
+
+        public BaseRepository(ApplicationContext Dbcontext)
         {
-            Context = context;
-        }
-        public TDbModel Create(TDbModel model)
-        {
-            Context.Set<TDbModel>().Add(model);
-            Context.SaveChanges();
-            return model;
-        }
-        public void Delete(int id)
-        {
-            var toDelete = Context.Set<TDbModel>().FirstOrDefault(m => m.Id == id);
-            Context.Set<TDbModel>().Remove(toDelete);
-            Context.SaveChanges();
-        }
-        public List<TDbModel> GetAll()
-        {
-            return Context.Set<TDbModel>().ToList();
-        }
-        public TDbModel Update(TDbModel model)
-        {
-            var toUpdate = Context.Set<TDbModel>().FirstOrDefault(m => m.Id == model.Id);
-            if(toUpdate is not null)
-            {
-                toUpdate = model;
-            }
-            Context.Update(toUpdate);
-            Context.SaveChanges();
-            return toUpdate;
+            _context = Dbcontext;
+            _dbSet = _context.Set<TDbModel>();
         }
         public TDbModel Get(int id)
-        {
-            return Context.Set<TDbModel>()?.FirstOrDefault(m => m.Id == id);
-        }
+            => _dbSet.FirstOrDefault(m => m.Id == id);
+        
+        public List<TDbModel> GetRange(int firstId, int lastId)
+            => _dbSet.Where(x => (x.Id >= firstId && x.Id <= lastId) || 
+                                 (x.Id <= firstId && x.Id >= lastId)).ToList();
         
     }
-}
+}   
