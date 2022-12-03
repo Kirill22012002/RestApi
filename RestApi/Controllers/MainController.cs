@@ -12,7 +12,7 @@
         }
 
         [HttpGet]
-        public JsonResult GetBooks(int startId, int endId)
-            => new JsonResult(_bookRepository.GetRange(startId, endId));
+        public JsonResult GetBooks(int firstId, int lastId)
+            => new JsonResult(_bookRepository.GetRange(firstId, lastId));
     }
 }

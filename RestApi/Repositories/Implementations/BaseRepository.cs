@@ -12,7 +12,7 @@ namespace RestApi.Repositories.Implementations
             _dbSet = _context.Set<TDbModel>();
         }
         public TDbModel Get(int id)
-            => _dbSet.FirstOrDefault(m => m.Id == id);
+            => _dbSet.FirstOrDefault(x => x.Id == id);
         
         public List<TDbModel> GetRange(int firstId, int lastId)
             => _dbSet.Where(x => (x.Id >= firstId && x.Id <= lastId) || 
