@@ -33,7 +33,7 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
         name: "default",
-        pattern: "{controller=Main}/{action=GetBooks}/{id?}");
+        pattern: "{controller=Main}/{action=GetSomeBooks}/{id?}");
 });
 
 app.Run();

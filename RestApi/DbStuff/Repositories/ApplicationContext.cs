@@ -1,4 +1,4 @@
-﻿namespace RestApi.Repositories
+﻿namespace RestApi.DbStuff.Repositories
 {
     public class ApplicationContext : DbContext
     {

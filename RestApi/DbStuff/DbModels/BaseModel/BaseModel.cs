@@ -1,4 +1,4 @@
-﻿namespace RestApi.Models.Base
+﻿namespace RestApi.DbStuff.Models.Base
 {
     public abstract class BaseModel
     {

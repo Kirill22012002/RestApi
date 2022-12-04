@@ -1,5 +1,4 @@
-﻿
-namespace RestApi.Models
+﻿namespace RestApi.DbStuff.Models
 {
     public class Book : BaseModel
     {
