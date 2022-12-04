@@ -14,6 +14,10 @@ var connectionString = @"Server=w12.hoster.by;TrustServerCertificate=True; DataB
 builder.Services.AddDbContext<ApplicationContext>(options =>
     options.UseSqlServer(connectionString));
 
+IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
+
+builder.Services.AddSingleton(mapper);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline
@@ -31,9 +35,7 @@ app.UseRouting();
 
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapControllerRoute(
-        name: "default",
-        pattern: "{controller=Main}/{action=GetSomeBooks}/{id?}");
+    endpoints.MapControllers();
 });
 
 app.Run();
